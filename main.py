@@ -36,28 +36,58 @@ def obter_entrada_usuario() -> tuple[int, int]:
         except ValueError:
             print("Por favor, digite números válidos.")
 
-def main():
+def mostrar_menu() -> int:
+    while True:
+        print("\n=== Menu de Encriptação/Desencriptação ===")
+        print("1. Encriptar texto")
+        print("2. Desencriptar texto")
+        print("3. Sair")
+        
+        try:
+            opcao = int(input("\nEscolha uma opção (1-3): "))
+            if 1 <= opcao <= 3:
+                return opcao
+            print("Por favor, escolha uma opção válida (1-3).")
+        except ValueError:
+            print("Por favor, digite um número válido.")
+
+def encriptar():
     arquivo_entrada = input("Digite o nome do arquivo de entrada: ")
     texto = ler_arquivo(arquivo_entrada)
     chave, coluna_inicial = obter_entrada_usuario()
     
     texto_encriptado = encriptar_texto(texto, chave, coluna_inicial)
-    texto_desencriptado = desencriptar_texto(texto_encriptado, chave, coluna_inicial)
-    
     escrever_arquivo("encriptado.txt", texto_encriptado)
-    escrever_arquivo("desencriptado.txt", texto_desencriptado)
     
     print("\nTexto original:")
     print(texto)
     print("\nTexto encriptado:")
     print(texto_encriptado)
+
+def desencriptar():
+    arquivo_entrada = input("Digite o nome do arquivo de entrada: ")
+    texto_encriptado = ler_arquivo(arquivo_entrada)
+    chave, coluna_inicial = obter_entrada_usuario()
+    
+    texto_desencriptado = desencriptar_texto(texto_encriptado, chave, coluna_inicial)
+    escrever_arquivo("desencriptado.txt", texto_desencriptado)
+    
+    print("\nTexto encriptado:")
+    print(texto_encriptado)
     print("\nTexto desencriptado:")
     print(texto_desencriptado)
-    
-    if texto == texto_desencriptado:
-        print("\nVerificação bem-sucedida: O texto desencriptado corresponde ao texto original!")
-    else:
-        print("\nAviso: O texto desencriptado não corresponde ao texto original!")
+
+def main():
+    while True:
+        opcao = mostrar_menu()
+        
+        if opcao == 1:
+            encriptar()
+        elif opcao == 2:
+            desencriptar()
+        else:
+            print("\nPrograma encerrado.")
+            break
 
 if __name__ == "__main__":
     main() 
