@@ -1,77 +1,63 @@
-from encrypt import encrypt_text, decrypt_text
+from encrypted import encriptar_texto, desencriptar_texto
 
-def read_file(filename: str) -> str:
-    """Read text from a file."""
+def ler_arquivo(nome_arquivo: str) -> str:
     try:
-        with open(filename, 'r', encoding='utf-8') as file:
-            return file.read()
+        with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
+            return arquivo.read()
     except FileNotFoundError:
-        print(f"Error: File '{filename}' not found.")
+        print(f"Erro: Arquivo '{nome_arquivo}' não encontrado.")
         exit(1)
     except Exception as e:
-        print(f"Error reading file: {e}")
+        print(f"Erro ao ler arquivo: {e}")
         exit(1)
 
-def write_file(filename: str, content: str) -> None:
-    """Write text to a file."""
+def escrever_arquivo(nome_arquivo: str, conteudo: str) -> None:
     try:
-        with open(filename, 'w', encoding='utf-8') as file:
-            file.write(content)
+        with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
+            arquivo.write(conteudo)
     except Exception as e:
-        print(f"Error writing to file: {e}")
+        print(f"Erro ao escrever arquivo: {e}")
         exit(1)
 
-def get_user_input() -> tuple[int, int]:
-    """Get key and start column from user input."""
+def obter_entrada_usuario() -> tuple[int, int]:
     while True:
         try:
-            key = int(input("Enter the encryption key (number of columns): "))
-            if key <= 0:
-                print("Key must be positive.")
+            chave = int(input("Digite a chave de encriptação (número de colunas): "))
+            if chave <= 0:
+                print("A chave deve ser positiva.")
                 continue
                 
-            start_column = int(input(f"Enter the starting column (1 to {key}): "))
-            if not 1 <= start_column <= key:
-                print(f"Starting column must be between 1 and {key}.")
+            coluna_inicial = int(input(f"Digite a coluna inicial (1 até {chave}): "))
+            if not 1 <= coluna_inicial <= chave:
+                print(f"A coluna inicial deve estar entre 1 e {chave}.")
                 continue
                 
-            return key, start_column
+            return chave, coluna_inicial
         except ValueError:
-            print("Please enter valid numbers.")
+            print("Por favor, digite números válidos.")
 
 def main():
-    # Get input file name
-    input_file = input("Enter the input file name: ")
+    arquivo_entrada = input("Digite o nome do arquivo de entrada: ")
+    texto = ler_arquivo(arquivo_entrada)
+    chave, coluna_inicial = obter_entrada_usuario()
     
-    # Read text from file
-    text = read_file(input_file)
+    texto_encriptado = encriptar_texto(texto, chave, coluna_inicial)
+    texto_desencriptado = desencriptar_texto(texto_encriptado, chave, coluna_inicial)
     
-    # Get encryption parameters
-    key, start_column = get_user_input()
+    escrever_arquivo("encriptado.txt", texto_encriptado)
+    escrever_arquivo("desencriptado.txt", texto_desencriptado)
     
-    # Encrypt text
-    encrypted = encrypt_text(text, key, start_column)
+    print("\nTexto original:")
+    print(texto)
+    print("\nTexto encriptado:")
+    print(texto_encriptado)
+    print("\nTexto desencriptado:")
+    print(texto_desencriptado)
     
-    # Decrypt text to verify
-    decrypted = decrypt_text(encrypted, key, start_column)
-    
-    # Write results to files
-    write_file("encrypted.txt", encrypted)
-    write_file("decrypted.txt", decrypted)
-    
-    # Print results
-    print("\nOriginal text:")
-    print(text)
-    print("\nEncrypted text:")
-    print(encrypted)
-    print("\nDecrypted text:")
-    print(decrypted)
-    
-    # Verify if decryption worked
-    if text == decrypted:
-        print("\nVerification successful: Decrypted text matches original text!")
+    if texto == texto_desencriptado:
+        print("\nVerificação bem-sucedida: O texto desencriptado corresponde ao texto original!")
     else:
-        print("\nWarning: Decrypted text does not match original text!")
+        print("\nAviso: O texto desencriptado não corresponde ao texto original!")
 
 if __name__ == "__main__":
     main() 

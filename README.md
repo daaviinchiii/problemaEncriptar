@@ -1,59 +1,59 @@
-# Text Encryption/Decryption Program
+# Programa de Encriptação/Desencriptação de Texto
 
-This program implements a transposition cipher for text encryption and decryption. It reads text from a file, encrypts it using the specified key and starting column, and then verifies the encryption by decrypting the text.
+Este programa implementa um cifra de transposição para encriptação e desencriptação de texto. Ele lê o texto de um arquivo, encripta usando a chave e coluna inicial especificadas, e então verifica a encriptação desencriptando o texto.
 
-## Features
+## Funcionalidades
 
-- Text encryption using transposition method
-- Text decryption
-- File I/O support
-- Input validation
-- Verification of encryption/decryption process
+- Encriptação de texto usando método de transposição
+- Desencriptação de texto
+- Suporte para entrada/saída de arquivos
+- Validação de entrada
+- Verificação do processo de encriptação/desencriptação
 
-## Requirements
+## Requisitos
 
-- Python 3.6 or higher
+- Python 3.6 ou superior
 
-## Usage
+## Como Usar
 
-1. Create a text file with the content you want to encrypt
-2. Run the program:
+1. Crie um arquivo de texto com o conteúdo que deseja encriptar
+2. Execute o programa:
    ```bash
    python main.py
    ```
-3. When prompted:
-   - Enter the input file name
-   - Enter the encryption key (number of columns)
-   - Enter the starting column (1 to key)
+3. Quando solicitado:
+   - Digite o nome do arquivo de entrada
+   - Digite a chave de encriptação (número de colunas)
+   - Digite a coluna inicial (1 até a chave)
 
-## Output
+## Saída
 
-The program will:
-1. Read the text from the input file
-2. Encrypt the text
-3. Decrypt the text to verify
-4. Save the encrypted text to `encrypted.txt`
-5. Save the decrypted text to `decrypted.txt`
-6. Display all three versions (original, encrypted, and decrypted) in the console
+O programa irá:
+1. Ler o texto do arquivo de entrada
+2. Encriptar o texto
+3. Desencriptar o texto para verificação
+4. Salvar o texto encriptado em `encriptado.txt`
+5. Salvar o texto desencriptado em `desencriptado.txt`
+6. Exibir todas as três versões (original, encriptada e desencriptada) no console
 
-## Example
+## Exemplo
 
-Input file (`input.txt`):
+Arquivo de entrada (`entrada.txt`):
 ```
 Encriptação por transposição
 ```
 
-Running the program with:
-- Key: 5
-- Starting column: 3
+Executando o programa com:
+- Chave: 5
+- Coluna inicial: 3
 
-Will produce:
-- Encrypted text in `encrypted.txt`
-- Decrypted text in `decrypted.txt`
-- Console output showing all three versions
+Produzirá:
+- Texto encriptado em `encriptado.txt`
+- Texto desencriptado em `desencriptado.txt`
+- Saída no console mostrando todas as três versões
 
-## Notes
+## Observações
 
-- The program handles UTF-8 encoding for proper character support
-- All characters, including newlines, are considered in the encryption
-- The program verifies that the decrypted text matches the original # problemaEncriptar.
+- O programa utiliza codificação UTF-8 para suporte adequado de caracteres
+- Todos os caracteres, incluindo quebras de linha, são considerados na encriptação
+- O programa verifica se o texto desencriptado corresponde ao original
